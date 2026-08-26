@@ -2,12 +2,12 @@
 
 namespace LibraryManagementSystem.Models
 {
-    public class Author
+    public class Author : Person
     {
-        private string _name;
         private string _biography;
 
         public Author(int authorId, string name, string biography)
+            : base(name)
         {
             if (authorId <= 0)
             {
@@ -15,26 +15,10 @@ namespace LibraryManagementSystem.Models
             }
 
             AuthorId = authorId;
-            Name = name;
             Biography = biography;
         }
 
         public int AuthorId { get; }
-
-        public string Name
-        {
-            get => _name;
-
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Author name cannot be empty.");
-                }
-
-                _name = value.Trim();
-            }
-        }
 
         public string Biography
         {
@@ -46,7 +30,7 @@ namespace LibraryManagementSystem.Models
             }
         }
 
-        public void DisplayInfo()
+        public override void DisplayInfo()
         {
             Console.WriteLine("--------------------------------------------------");
             Console.WriteLine($"Author ID : {AuthorId}");
